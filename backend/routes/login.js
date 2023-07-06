@@ -1,11 +1,16 @@
-let express = require('express')
+const express = require('express');
+const router = express.Router();
 const app = express();
-let router = express.Router()
-let connection = require('../connection')
 const login = require("../middleware/loginAuthenticator")
-const jwt = require('jsonwebtoken');
 
-router.post('/', async (req,res,next)=>{
+
+
+router.get("/", function(req,res){
+    res.status(200).send("Hello")
+})
+
+
+router.post("/", async (req,res,next)=>{
     if(!req || !req.headers.authorization){
         res.status(401).send(`<html>
         <body align=center>        
@@ -20,15 +25,7 @@ router.post('/', async (req,res,next)=>{
         const password = credentials[1];
         const isAuthenticated = await login.authenticateUser(email, password)
         if(isAuthenticated){
-            const userId = await login.getUserId(email)
-            const userType = await login.getUserType(email)
-            const accessToken = jwt.sign({email, password, userType, userId}, process.env.ACCESS_TOKEN_SECRET);
             res.status(200).send({
-                "user_id": userId,
-                "email": email,
-                "password": password,
-                "role": userType,
-                "token": accessToken,
                 "message": "user authenticated"
             })
         }
@@ -39,7 +36,6 @@ router.post('/', async (req,res,next)=>{
         }
     }
 })
-
 
 
 module.exports = router;
