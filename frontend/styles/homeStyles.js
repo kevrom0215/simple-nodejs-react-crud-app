@@ -11,7 +11,17 @@ const styles = StyleSheet.create({
   },
   textContainer:{
     backgroundColor: 'white',
-    padding: "20%"
+    padding: "20%",
+    margin: "5%",
+    width: "70%",
+    alignItems: "center"
+  },
+  nextButton: {
+    backgroundColor: 'white',
+    padding: "5%",
+    margin: "5%",
+    width: "70%",
+    alignItems: "center"
   }
 });
   

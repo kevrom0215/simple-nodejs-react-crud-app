@@ -1,27 +1,54 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, Alert } from 'react-native';
 import styles from "../styles/loginStyles";
+import { BASE_URL } from '@env';
+import { encode as base64Encode } from 'base-64';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     const iconLogo = require("../assets/ayaka.png")
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const handleLogin = () => {
       console.log('Login pressed');
-      
-      if((userCred === email)&&(pw === password) ){
-        console.log("Login Success")
+      try{
+        const loginData = {
+          username: email,
+          password: password
+        };
+        const authHeader = 'Basic ' + base64Encode(`${email}:${password}`);
+
+        fetch(`${BASE_URL}/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: authHeader,
+          },
+          body: JSON.stringify(loginData),
+        })
+        .then((response) => {
+          if (response.ok) {
+            // Login successful
+            Alert.alert('Success', 'Logged in successfully.');
+            // Perform any additional actions upon successful login
+            navigation.navigate('Menu')
+          } else {
+            // Login failed
+            Alert.alert('Error', 'Invalid username or password.');
+          }
+        })
+        .catch((error) => {
+          // Error occurred during the request
+          Alert.alert('Error', 'An error occurred. Please try again later.');
+        });
       }
-      else{
-        console.log("Invalid User Credentials")
+      catch(error){
+        Alert.alert('Error', 'Please enter some text.')
       }
     };
   
     
   
-    const userCred = "kenneth";
-    const pw = "kiss";
     
   
   
