@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const login = require('./routes/login')
+const items = require('./routes/items')
 const router = express.Router();
 const app = express();
 
@@ -8,8 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
+app.use("/items",items)
 app.use("/login",login)
+
+
+
 app.get('/', (req, res) => {
     const message = 'Hello World!';
     res.status(200).send({message})
@@ -19,7 +23,6 @@ app.get('*', (req,res) => {
 })
 
 
-app.use("/",router)
 
 const port = 3000;
 app.listen(port, () => {
