@@ -24,7 +24,7 @@ router.post("/", async (req,res,next)=>{
         const email = credentials[0];
         const password = credentials[1];
         const isAuthenticated = await login.authenticateUser(email, password)
-        if(isAuthenticated){
+        if(isAuthenticated.length != 0){
             res.status(200).send({
                 "message": "user authenticated"
             })

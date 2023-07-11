@@ -1,29 +1,14 @@
-let connection = require("../connection");
+const db = require("../connection");
 
-getUserbyUsername = async function(username){
-    const users = await new Promise((resolve,reject)=>{
-        connection.query("SELECT username, password from users", (err,result,fields)=>{
-            if(err) reject(err);
-            else{
-                resolve(result)
-            }
-        })
-    })
-    const filteredUserArray = users.filter(
-        (user) => user.username === username
-    )
-    return filteredUserArray.length === 0 ? null: filteredUserArray[0];
-}
-
-authenticateUser = async function(username, password){
-    const user = await getUserbyUsername(username);
-    if(user){
-        return (password === user.password);
-    }
-    else{
-        return false;
-    }
-}
+const authenticateUser = async function(username, password) {
+  return new Promise((resolve, reject) => {
+    sql = `SELECT username, password FROM users WHERE username = ? AND password = ?`;
+    db.all(sql, [username, password], (err, rows) => {
+      if (err) return reject(err);
+      resolve(rows);
+    });
+  });
+};
 
 module.exports = {
     authenticateUser

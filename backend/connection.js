@@ -1,18 +1,10 @@
-let mysql = require('mysql')
-require('dotenv').config()
+let sql;
+const sqlite3 = require('sqlite3').verbose();
 
-let connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
-})
+//connect to DB
+const db = new sqlite3.Database('test.db',sqlite3.OPEN_READWRITE,(err)=>{
+    if (err) return console.error(err.message);
+});
 
-connection.connect((err)=>{
-    if(err){
-        throw err;
-    }
-    console.log(">>> Connected to the Database")
-})
 
-module.exports = connection;
+module.exports = db;
