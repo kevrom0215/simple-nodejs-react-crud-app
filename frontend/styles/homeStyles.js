@@ -10,18 +10,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textContainer:{
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     padding: "20%",
     margin: "5%",
     width: "70%",
     alignItems: "center"
   },
   nextButton: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     padding: "5%",
     margin: "5%",
     width: "70%",
     alignItems: "center"
+  },
+  text:{
+    color: "#FFFFFF"
   }
 });
   

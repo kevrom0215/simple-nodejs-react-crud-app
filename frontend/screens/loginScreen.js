@@ -67,7 +67,7 @@ const LoginScreen = ({navigation}) => {
             placeholderTextColor="#003f5c"
             onChangeText={(password) => setPassword(password)}/>
           <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-            <Text style={{color: "white"}}>Login</Text>
+            <Text style={{color: "#ffffff"}}>Login</Text>
           </TouchableOpacity>
         </View>
         <StatusBar style="auto" />
