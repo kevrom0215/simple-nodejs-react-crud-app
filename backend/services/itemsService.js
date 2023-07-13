@@ -13,8 +13,7 @@ const listItems = async function(req,res){
 };
 
 const addItem = async function(req,res){
-    //need to check for duplicates
-    if (await checkItem(req,res)){
+    if (await checkItem(req,res) && reqBodyChecker(req,res)){
         res.status(400).send("Item already exists")
     }
     else{
@@ -31,7 +30,7 @@ const addItem = async function(req,res){
 
 const editItem = async function(req, res) {
     //check if existing
-    if (await checkItem(req,res)){
+    if (await checkItem(req,res) && reqBodyChecker(req,res)){
         return new Promise((resolve, reject) => {
             const sql = editItemDAO;
             console.log(sql)
@@ -71,7 +70,8 @@ const checkItem = async function(req,res){
 
 const deleteItem = async function(req, res){
     console.log("Delete Triggered")
-    return new Promise((resolve, reject) =>{
+    if(reqBodyChecker(req,res)){
+        return new Promise((resolve, reject) =>{
         sql = deleteItemDAO
         db.run(sql, [req.body.name], (err)=>{
             if (err) {
@@ -81,7 +81,22 @@ const deleteItem = async function(req, res){
             console.log(`Deleted item ${req.body.name}`)
             res.status(200).send(`Deleted item ${req.body.name}`)
         })
-    })
+        })
+    }
+    else{
+        res.status(400).send("No request body")
+    }
+    
+}
+
+const reqBodyChecker = async function(req,res){
+    if (Object.keys(req.body).length === 0) {
+        // Request body is empty or not present
+        return false
+    } 
+    else{
+        return true;
+    }
 }
 
 module.exports = {

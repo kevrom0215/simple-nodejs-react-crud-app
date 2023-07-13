@@ -65,7 +65,8 @@ const LoginScreen = ({navigation}) => {
           <TextInput style={styles.TextInput}
             placeholder="Password"
             placeholderTextColor="#003f5c"
-            onChangeText={(password) => setPassword(password)}/>
+            onChangeText={(password) => setPassword(password)}
+            secureTextEntry={true}/>
           <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
             <Text style={{color: "#ffffff"}}>Login</Text>
           </TouchableOpacity>

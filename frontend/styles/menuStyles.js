@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
     item: {
       flex: 1,
-      margin: "3%",
+      margin: "5%",
       padding: "10%",
       backgroundColor: "#272F59",
       alignItems: "center",
@@ -25,7 +25,11 @@ const styles = StyleSheet.create({
       color: "#FFFFFF"
     },
     Title: {
+      backgroundColor: "#FFFFFF",
       padding: "20%",
+      margin: "5%",
+      width: "90%",
+      borderRadius: 10
     }
   });
   

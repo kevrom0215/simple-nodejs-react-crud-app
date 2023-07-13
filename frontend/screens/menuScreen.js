@@ -25,6 +25,11 @@ const MenuScreen = ({navigation}) =>{
               <Text style={styles.text}>Delete</Text>
             </TouchableOpacity>
           </View>
+          <View style={styles.row}>
+          <TouchableOpacity style = {styles.item} onPress={()=>navigation.navigate('Edit')}>
+              <Text style={styles.text}>Export to CSV</Text>
+              </TouchableOpacity>
+          </View>
         </SafeAreaView>
     )
 }
