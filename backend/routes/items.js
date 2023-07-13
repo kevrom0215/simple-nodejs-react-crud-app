@@ -3,6 +3,7 @@ const { listItems, addItem, editItem, deleteItem } = require('../services/itemsS
 const router = express.Router();
 const app = express();
 
+//getAll
 router.get("/", async (req,res, next)=>{
     try{
         await listItems(req,res)
@@ -23,7 +24,7 @@ router.post("/", async (req,res,next)=>{
     
 })
 
-//update
+//updateQuantity
 router.put("/", async(req,res,next)=>{
     try{
        await editItem(req,res)
@@ -33,7 +34,7 @@ router.put("/", async(req,res,next)=>{
     }
 })
 
-//delete
+//deleteItem
 router.delete("/", async(req,res,next)=>{
     try{
         await deleteItem(req,res)
