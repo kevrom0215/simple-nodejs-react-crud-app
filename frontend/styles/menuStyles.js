@@ -13,14 +13,19 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
     },
     item: {
-      margin: "5%",
-      width: 150,
-      height: 150,
+      flex: 1,
+      margin: "3%",
+      padding: "10%",
       backgroundColor: "#272F59",
       alignItems: "center",
-      justifyContent: "center"
-    },text:{
+      justifyContent: "center",
+      borderRadius: 10
+    },
+    text:{
       color: "#FFFFFF"
+    },
+    Title: {
+      padding: "20%",
     }
   });
   

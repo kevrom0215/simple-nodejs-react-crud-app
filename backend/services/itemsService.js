@@ -34,6 +34,7 @@ const editItem = async function(req, res) {
     if (await checkItem(req,res)){
         return new Promise((resolve, reject) => {
             const sql = editItemDAO;
+            console.log(sql)
             db.run(sql, [req.body.quantity, req.body.name], (err) => {
                 if (err) {
                     console.error(err.message);
@@ -44,15 +45,18 @@ const editItem = async function(req, res) {
         });
     }
     else{
-        res.status(500).send('No item found');
+        console.log("Something went wrong")
+        res.status(500).send('Something went wrong');
     }
+    
     
 };
 
 const checkItem = async function(req,res){
+    console.log("checking item")
     return new Promise((resolve, reject) => {
         const sql = checkItemDAO;
-        db.run(sql, [req.body.name], (err, row) =>{
+        db.get(sql, [req.body.name], (err, row) =>{
             if(err){
                 console.error(err.message);
                 reject();
@@ -66,6 +70,7 @@ const checkItem = async function(req,res){
 }
 
 const deleteItem = async function(req, res){
+    console.log("Delete Triggered")
     return new Promise((resolve, reject) =>{
         sql = deleteItemDAO
         db.run(sql, [req.body.name], (err)=>{
@@ -73,6 +78,7 @@ const deleteItem = async function(req, res){
                 console.error(err.message);
                 return res.status(500).send('Internal Server Error');
             }
+            console.log(`Deleted item ${req.body.name}`)
             res.status(200).send(`Deleted item ${req.body.name}`)
         })
     })

@@ -30,8 +30,10 @@ router.post("/", async (req,res,next)=>{
 
 //update
 router.put("/", async(req,res,next)=>{
+    console.log("Update Endpoint Triggered")
     if (Object.keys(req.body).length === 0) {
         // Request body is empty or not present
+        console.log("Request body is required")
         res.status(400).send("Request body is required");
     } 
     else{

@@ -1,11 +1,44 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image } from "react-native"
-import styles from "../styles/listStyles"
+import { View, Text, SafeAreaView, TouchableOpacity, Image , Alert} from "react-native"
+import styles from "../styles/deleteStyles"
 import { useEffect,useState } from "react"
 import { BASE_URL } from '@env';
 import { ScrollView } from "react-native-gesture-handler";
 
-const ListScreen = ({navigation}) =>{
+const DeleteScreen = ({navigation}) =>{
+    
     const [data, setData] = useState([]);
+
+    const handleDelete = (itemName) =>{
+        console.info('Deleting');
+        try{
+            const deleteData = {
+                name: itemName,
+            }
+
+            fetch(`${BASE_URL}/items`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(deleteData)
+            })
+            .then((response) =>{
+                if(response.ok){
+                    Alert.alert('Success', `Item ${itemName} deleted!`);
+                    console.log("Deleted")
+                    navigation.navigate('Menu')
+                }
+                else{
+                    Alert.alert('Error', 'Invalid Request')
+                }
+            })
+        }
+        catch(error){
+            console.error()
+            Alert.alert('Error', 'Something went wrong')
+        }
+    }
+
 
     useEffect(()=>{
         //fetch JSON data
@@ -33,6 +66,9 @@ const ListScreen = ({navigation}) =>{
                     <View style={styles.listLegendLabel}>
                         <Text style={styles.itemLabel}>Quantity</Text>
                     </View>
+                    <View style={[styles.listLegendLabel]}>
+                        <Image style={[styles.trashIcon]} source={require('../assets/trash.png')}/>
+                    </View>
                     
                 </View>
             </View>
@@ -41,6 +77,9 @@ const ListScreen = ({navigation}) =>{
                     <View style={styles.item} key={item.id}>
                         <View style={styles.itemName}><Text style={styles.itemLabel}>{item.name}</Text></View>
                         <View style={styles.itemQuantity}><Text style={styles.itemLabel}>{item.quantity}</Text></View>
+                        <TouchableOpacity onPress={()=>handleDelete(item.name)} style={styles.itemTrash}>
+                            <Image style={styles.trashIcon} source={require('../assets/trash.png')}/>
+                            </TouchableOpacity>
                     </View>
                 ))}
             </ScrollView>
@@ -51,4 +90,4 @@ const ListScreen = ({navigation}) =>{
     )
 }
 
-export default ListScreen;
+export default DeleteScreen;
