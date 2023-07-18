@@ -26,9 +26,12 @@ const MenuScreen = ({navigation}) =>{
             </TouchableOpacity>
           </View>
           <View style={styles.row}>
-          <TouchableOpacity style = {styles.item} onPress={()=>navigation.navigate('Edit')}>
+            <TouchableOpacity style = {styles.item} onPress={()=>navigation.navigate('Edit')}>
               <Text style={styles.text}>Export to CSV</Text>
-              </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.item} onPress={()=>navigation.navigate('Stock')}>
+              <Text style={styles.text}>Shelf</Text>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
     )

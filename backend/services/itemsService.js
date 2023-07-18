@@ -14,6 +14,7 @@ const listItems = async function(req,res){
 
 const addItem = async function(req,res){
     if (await checkItem(req,res) && reqBodyChecker(req,res)){
+        console.info("Item already exists")
         res.status(400).send("Item already exists")
     }
     else{
@@ -96,6 +97,17 @@ const reqBodyChecker = async function(req,res){
     } 
     else{
         return true;
+    }
+}
+
+
+const checkFields = async function(req){
+    console.log(typeof req.body.quantity)
+    if (typeof req.body.quantity === "number"){
+        return true
+    }
+    else{
+        return false
     }
 }
 

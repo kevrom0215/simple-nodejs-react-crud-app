@@ -1,7 +1,7 @@
 const express = require('express');
 const { listItems, addItem, editItem, deleteItem } = require('../services/itemsService');
 const router = express.Router();
-const app = express();
+
 
 //getAll
 router.get("/", async (req,res, next)=>{

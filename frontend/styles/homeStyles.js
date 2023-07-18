@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     width: "70%",
     alignItems: "center"
   },
-  nextButton: {
+  button: {
     backgroundColor: '#ffffff',
     padding: "5%",
     margin: "5%",
@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
   },
   text:{
     color: "#FFFFFF"
+  },
+  disabledButton: {
+    // Styles specific to disabled button
+    opacity: 0.5,
   }
 });
   

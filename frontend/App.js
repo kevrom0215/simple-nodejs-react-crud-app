@@ -10,6 +10,7 @@ import ListScreen from './screens/ListScreen';
 import AddScreen from './screens/addScreen';
 import DeleteScreen from './screens/deleteScreen';
 import EditScreen from './screens/editScreen';
+import StockScreen from './screens/stockScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const App = () =>{
         <Stack.Screen name="Add" component={AddScreen}/>
         <Stack.Screen name="Delete" component={DeleteScreen}/>
         <Stack.Screen name="Edit" component={EditScreen}/>
+        <Stack.Screen name="Stock" component={StockScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
