@@ -32,19 +32,14 @@ const HomeScreen = ( {navigation} ) => {
       const dateTriggered = new Date(data.date_triggered)
       const currentDate = new Date();
       var pass;
-      console.log(dateTriggered)
-      console.log(currentDate)
       if(currentDate.getDate() <= dateTriggered.getDate() ){
-        console.log("past")
         pass = false;
         startTimer(pass)
       }
       else{
-        console.log("future")
         pass = true
         startTimer(pass)
       }
-      console.log(pass)
     }catch(error){
         console.log('Error fetching data: ',error)
       }
